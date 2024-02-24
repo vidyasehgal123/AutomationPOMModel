@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import unittest
 import time
+from POMModel.Pages.loginPage import LoginPage
 
 class LoginTest(unittest.TestCase):
 
@@ -13,10 +14,15 @@ class LoginTest(unittest.TestCase):
 
 
      def test_login_valid(self):
-        self.driver.get("https://www.saucedemo.com/v1/")
-        self.driver.find_element(By.NAME, "user-name").send_keys("standard_user")
-        self.driver.find_element(By.NAME, "password").send_keys("secret_sauce")
-        self.driver.find_element(By.ID, "login-button").click()
+        driver =self.driver
+        login = LoginPage(driver)
+        login.enter_username("standard_user")
+        login.enter_password("secret_sauce")
+        login.click_login()
+       # driver.get("https://www.saucedemo.com/v1/")
+        #driver.find_element(By.NAME, "user-name").send_keys("standard_user")
+        #driver.find_element(By.NAME, "password").send_keys("secret_sauce")
+        #driver.find_element(By.ID, "login-button").click()
         time.sleep(3)
 
      @classmethod
